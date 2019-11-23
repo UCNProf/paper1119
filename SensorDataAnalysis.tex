@@ -43,21 +43,6 @@ The technological revolution, known as industry 4.0, aims to improve efficiency/
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-\iffalse
-Due to the emergence of the fourth industrial revolution (Industry 4.0) or smart manufacturing, manufacturing business all over the world is changing dramatically; it needs enhanced efficiency, competency and productivity. More and more manufacturing machines are equipped with sensors and the sensors produce huge volume of data. Most of the companies do neither realize the value of data nor how to capitalize the data. The companies lack techniques and tools to collect, store, process and analyze the data. The objective of this paper is to propose data analytic techniques to analyze manufacturing/production data. The analytic techniques will provide both descriptive and predictive analysis. In addition, data from the company's ERP system is integrated in the analysis. The proposed techniques will help the companies to improve operational efficiency and achieve competitive benefits.
-\fi
 \keywords{Industry 4.0  \and Sensor Data \and Data Analysis \and Machine Learning \and Smart Manufacturing} \and {Imbalanced Data}
 \end{abstract}
 %
@@ -69,13 +54,6 @@ Data analysis uses many techniques ranging from statistics to machine learning. 
 It enlists business objectives, data insight, data preprocessing, modeling and evaluation. This work was achieved in collaboration with Dolle \cite{Dolle}. 
 Dolle is a leader in manufacturing of timber loft ladders and is present in more than 40 countries worldwide. Competing globally require an efficient production process and a rigorous quality control in order to maintain profitability and productivity. This has led the development of these sensor data analysis and machine learning techniques. A main goal of building machine learning methods for Dolle is to reduce downtime and improve profitability by predicting production line disruptions.
 
-
-
-\iffalse
- Where new technologies merge the physical, digital and biological spheres. Industry 4.0 requires no human involvement in manufacturing and depends on artificial intelligence, machine learning and big data technologies. In order to retain the prospective and competitive position in the international market and to optimize productivity, \textit{Dolle} \cite{Dolle} relies on business analytics to explore large volumes of data, expose undetected patterns, correlations and new key production parameters. Dolle is a market leader in Europe for wooden loft ladders manufactured from wood PARs. It is present in more than 40 countries worldwide, loft ladders remain its flagship product, however, it also produces modular staircases, spiral and space saving staircases as well as a comprehensive range of banisters under the \textit{Prova} brand. Further, industry proven Cross-industry Standard Process for Data Mining (CRISP-DM) \cite{CRM} is used for problem solving in Dolle's business analytics. It consists of following six phases: business understanding, data understanding, data preparation, modeling, evaluation and deployment (optional). 
-
-This paper presents data analytic techniques capable of performing both descriptive and predictive analysis. In order to demonstrate the techniques, a real-world case study from manufacturing industry is selected. The sensor, alarm and enterprise resource planning (ERP) system data provided by the case study is first consolidated at a central repository. Then, an exploratory/descriptive analysis is performed in order to gain insight into the real business problems. Further, a predictive analysis using machine learning is performed. To summarize, the main contributions in this paper are as follow:
-\fi
 This paper is a significant extension of our previous conference paper \cite{nadeem}. In the previous work a data pipeline to handle data acquisition, processing and analysis was proposed. An exploratory analysis of the data was provided. Further, a statistically based machine learning model to predict costly production line disruptions was also presented using a real-life case study. This paper extends \cite{nadeem} by building multiple machine learning models and evaluating the performance of these models to select the best one(s) and it also presents techniques to handle imbalanced data.
 
 To summarize, the main contributions in this paper are as follow:
@@ -96,21 +74,7 @@ the machine learning models. Section~\ref{sec:evaluation} evaluates the equipmen
 
 \section{Objectives}
 \label{sec:businessunderstanding}
-\iffalse
-\begin{wrapfigure}{r}{0.4\textwidth}
-  \begin{center}
-    \includegraphics[width=0.6\textwidth]{machine1}
-  \end{center}
-  \vspace{-3mm}
-  \caption{Three-section timber loft ladder at Dolle's assembly line}
-  \label{fig:ladder1}
-\end{wrapfigure}
-\fi
-
-\iffalse
-The focus of this section is to understand the basic concepts of smart manufacturing in consultation with domain experts. Project objectives are derived from the viewpoint of Dolle requirements and subsequently converted into data science problem definitions. Some of Dolle's primary objectives, from a business perspective are described as follow. When machines are started, Dolle would like to know how long it takes, before the right output pace with regards to the product (ladder) manufactured is achieved (see Fig.~\ref{fig:ladder1}). Output rate is the average time between the start of production of one unit and the start of production of the next unit. How fast are items moving through the machines? What is optimal rate? In addition, What are the causes of production disruption? Dolle would also like to know how much time is spent on changeovers (product types). A business goal states objectives in business terms, whereas, a data mining goal states objectives in technical terms. A non-exhaustive list of data mining goals:
-\fi
-The focus of this section is to understand the basic concepts of smart manufacturing in consultation with domain experts. The objectives of the project are derived from the viewpoint and requirements of Dolle. Properly scrutenized they are then translated to data science problems. From a business perspective Dolle's primary questions include: How long does it take, before the right output pace is achieved after a machine is started (see Fig.~\ref{fig:ladder1})? Relating to the output pace being defined as the average time between the start of manufacturing of one unit and the start of manufacturing of the next unit: What is the current rate? What is the optimal rate? What are the causes and length of production stops? In addition, Dolle would like to know the amount of time spent changing from one product type to another.  
+The focus of this section is to understand the basic concepts of smart manufacturing in consultation with domain experts. The objectives of the project are derived from the viewpoint and requirements of Dolle. Properly scrutinized they are then translated to data science problems. From a business perspective Dolle's primary questions include: How long does it take, before the right output pace is achieved after a machine is started (see Fig.~\ref{fig:ladder1})? Relating to the output pace being defined as the average time between the start of manufacturing of one unit and the start of manufacturing of the next unit: What is the current rate? What is the optimal rate? What are the causes and length of production stops? In addition, Dolle would like to know the amount of time spent changing from one product type to another.  
 
 \begin{figure}
 \centering
@@ -130,19 +94,11 @@ After defining the goals in business terminology, these goals are then translate
 \end{enumerate} 
 
 
-
-\iffalse
-In general, production with 80-85 \% efficiency is considered very efficient. It is of interest to look into every predicted and unpredicted incident during production. Why did it happen? Can it be predicted (if unpredicted) and mitigated? How can production be optimised? Some challenges during production are known, such as, breakdowns, changeovers, minor stoppages, reduced speed, defects and setup scrap. As a result, the success of the manufacturing process can be measured by calculating the \textit{Overall Equipment Effectiveness (OEE)} \cite{oee}. OEE is the most widely used standard for measuring manufacturing productivity. 
-\fi
 In general, production with 80-85 \% efficiency is considered very efficient. It will be interesting to investigate every predicted and unpredicted incident during production: What caused it? Can it be predicted(if unpredicted) and mitigated? Some of the known challenges during production are: breakdowns, changeovers, minor stoppage, reduced speed, defects and setup scrap. Hence, the quality of the manufacturing process can be measured by calculating the \textit{Overall Equipment Effectiveness (OEE)} \cite{oee}. OEE is the most common standard for measuring manufacturing productivity. It calculates the percentage of manufacturing time that is truly productive. 
 
 \section{Initial Insights about Data}
 \label{sec:dataunderstanding}
-\iffalse
-This section starts with data collection and proceeds with activities that targets understanding the data. These activities include first insight into the data, identifying data for analysis purposes, discovering data quality issues and/or detecting interesting subsets to form hypothesis regarding previously undetected patterns. Machine data (sensors and alarms) and ERP system data (product, job execution and work calendar) are provided by Dolle (Fig.~\ref{fig:data}). The machine data are provided in the form of binary values of 0's and 1's. The number of attributes depends on the machine in question. The product dataset consists of 85 attributes, the job execution dataset consists of 69 attributes and the work calendar dataset contains 10 attributes. Each job represents a specific business task that is carried out for a certain time interval to produce particular type of ladders. The structure of the data does not conform to any standard and additionally no assumptions can be made that two identical units or machines display identical structures. 
-%This potentially presents a big data \cite{bigdata} problem, where data has 3 V’s: volume, velocity and variety. 
-\fi
-This section starts with the data acquisition and proceeds with the activities which describe how initial insights of the data are obtained. Firstly, the data acquisition is described and hereafter, activities that provide understanding of the data are discussed. These activities include getting the first insight into the data, identifying data for analysis purposes, discovering data quality issues and/or detecting interesting subsets to form hypothesis regarding previously undetected patterns. The data provided by Dolle is machine data and ERP system data (Fig.~\ref{fig:data}). Machine data describe the state of sensors and alarms, whereas, ERP data provides information about products, job executions and work calendar. The machine data consists of only binary values (0's and 1's). The number of attributes depends on the specific machine in question. The product data set contains 85 attributes, the job execution data set contains 69 attributes and the work calendar data set has 10 attributes. Each job represents a specific business task that is carried out for a certain time interval to produce particular type of ladders. The structure of the data does not conform to any standard and additionally no assumptions can be made that two identical units or machines display identical structures. %This potentially presents a big data \cite{bigdata} problem, where data has 3 V’s: volume, velocity and variety.
+This section starts with the data acquisition and proceeds with the activities which describe how initial insights of the data are obtained. Firstly, the data acquisition is described and hereafter, activities that provide understanding of the data are discussed. These activities include getting the first insight into the data, identifying data for analysis purposes, discovering data quality issues and/or detecting interesting subsets to form hypothesis regarding previously undetected patterns. The data provided by Dolle is machine data and ERP system data (Fig.~\ref{fig:data}). Machine data describe the state of sensors and alarms, whereas, ERP data provides information about products, job executions and work calendar. The machine data consists of only binary values (0's and 1's). The number of attributes depends on the specific machine in question. The product data set contains 85 attributes, the job execution data set contains 69 attributes and the work calendar data set has 10 attributes. Each job represents a specific business task that is carried out for a certain time interval to produce particular type of ladders. The structure of the data does not conform to any standard and additionally no assumptions can be made that two identical units or machines display identical structures. 
 
 \begin{figure}
 \centering
@@ -186,14 +142,11 @@ This section starts with the data acquisition and proceeds with the activities w
 \hline
 \end{tabular}
 \end{table*}
-\iffalse
-Dolle's case study clearly illustrate the challenges faced in data analysis in the smart manufacturing industry. The data analysis methods presented in this paper, however, are general. In this case study machine data (from the production facility) has to be logged in order to register the states of the machines. The logged data is initially kept in detailed format in different database tables (a separate table for each machine). As mentioned above, each machine has a different set of sensors/attributes, for that reason only one of the machine is considered for demonstration purposes. The selected machine (\emph{Machine\_1}) consists of the following attributes: \emph{(DateTime, MachineOn, PaceIn, PaceOut, FaultyString, ScrewError, Alarm)}. The DateTime identifies a recording of a date and time event at one second granularity. The \emph{MachineOn} sensor indicates the machine is running for a given job. The \emph{PaceIn} or entrance of a string/beam sensor represents an incoming string. The \emph{PaceOut} or exit of a ladder sensor represents an outgoing ladder. The FaultyString sensor signifies the quality of the string, the bended or twisted strings are regarded as faulty strings. The ScrewError sensor corresponds to the screw machine that screw strings into place. Finally, the Alarm or Error sensor stands in for the general abnormality in the machine. For example, a string has struck in the machine. The alarm in the long run may lead the machine to a stop still.
-\fi
-Dolle's case study clearly illustrate the challenges faced in data analysis in the smart manufacturing industry. The data analysis methods presented in this paper, however, are general. In this case study machine data from the production facility are logged in order to record the states of the machines at any given time. The logged data is initially kept in detailed format in different database tables (a separate table for each machine). As mentioned above, each machine has a different set of sensors/attributes, for that reason only one of the machines is considered for demonstration purposes. The selected machine (\emph{Machine\_1}) consists of the following attributes: \emph{(DateTime, MachineOn, PaceIn, PaceOut, FaultyString, ScrewError, Alarm)}. The DateTime identifies a recording of a date and time event at a second granularity. The \emph{MachineOn} sensor indicates the machine is running for a given job. The \emph{PaceIn} or entrance of a beam/PAR sensor represents an incoming PAR. The \emph{PaceOut} or exit of a ladder sensor represents an outgoing ladder. The \emph{FaultyString} sensor signifies the quality of the PAR. Bended or twisted PARs are regarded as faulty PARs. The \emph{ScrewError} sensor corresponds to the screw machine that screw PARs into place. Finally, the \emph{Alarm} or Error sensor represents a general abnormality in the machine. For example, a PAR is struck in the machine. An alarm for extended time may result in a  machine stoppage.
+
+Dolle's case study clearly illustrate the challenges faced in data analysis in the smart manufacturing industry. The data analysis methods presented in this paper, however, are general. In this case study machine data from the production facility are logged in order to record the states of the machines at any given time. The logged data is initially kept in detailed format in different database tables (a separate table for each machine). As mentioned above, each machine has a different set of sensors/attributes, for that reason only one of the machines is considered for demonstration purposes. The selected machine (\emph{Machine\_1}) consists of the following attributes: \emph{(DateTime, MachineOn, PaceIn, PaceOut, FaultyString, ScrewError, Alarm)}. The DateTime identifies a recording of a date and time event at a second granularity. The \emph{MachineOn} sensor indicates the machine is running for a given job. The \emph{PaceIn} or entrance of a beam/PAR sensor represents an incoming PAR. The \emph{PaceOut} or exit of a ladder sensor represents an outgoing ladder. The \emph{FaultyString} sensor signifies the quality of the PAR. Bended or twisted PARs are regarded as faulty PARs. The \emph{ScrewError} sensor corresponds to the screwing machine that screw PARs into place. Finally, the \emph{Alarm} or Error sensor represents a general abnormality in the machine. For example, a PAR is struck in the machine. An alarm for extended time may result in a  machine stoppage.
 
 In order to provide a snapshot of data, a real machine data set provided by Dolle is used. The snapshot contains 7 attributes for job no. 307810 to produce a CF (ClickFix) type ladder. In Table~\ref{example}, initially the granularity of the detailed data is at \emph{second by job by machine}. Ex: Row number 1 reads as follows: \emph{DateTime}=19-02-2019 09:53:07 (represents: second granularity. It is important to note that if the next row has same values as the previous row in that case the next row will not be logged to the database causing the time discontinuity), \emph{MachineOn}=1 (represents: machine is running), \emph{PaceIn}=0 (represents: no PAR is entering), \emph{PaceOut}=1 (represents: exiting of the ladder), \emph{FaultyString}=0 (represents: the quality of the PAR is OK), \emph{ScrewError}=0 (represents: no error in the screwing machine) and \emph{Alarm}=0 (represents: no abnormality in the machine). Whereas, Id is an abstract attribute and used only for row identification purposes. Similarly, row number 13 reads as follows: \emph{DateTime}=19-02-2019 09:56:14, \emph{MachineOn}=1, \emph{PaceIn}=0, \emph{PaceOut}=0 (represents: no ladder is exiting), \emph{FaultyString}=0, \emph{ScrewError}=1 (represents: an error in the screwing machine) and \emph{Alarm}=0 (represents: no abnormality in the machine identified yet). Further, initial look into the data in Table~\ref{example} reveals some interesting facts, such as, the ladder is produced (row 7) in 09:54:04 - 09:53:07 = 57 seconds (average pace), where as, the next ladder is produced (row 15) in 09:56:29 - 09:54:04 = 145 seconds. The delay in the production of the next ladder is due to the fact that an alarm has been triggered (row 11) and a screwing machine error has also caused the delay (row 13). 
 
-Further, Table~\ref{example2} displays some of the attributes of the ERP system data that may be used for analysis purposes \emph{(JobId, ProductId, JobStart (date and time), JobEnd (date and time), JobFinished, GoodQuality)}. As mentioned earlier, ERP system data has 164 attributes, in total. The \emph{JobId} represents the given job. The \emph{productId} represents a specific product. The \emph{JobStart} represents the date and time when a job starts. Similarly, \emph{JobEnd} represents the date and time when a job ends. A job may be carried out in multiple time intervals as seen in Table~\ref{example2}. The \emph{JobFinished} characterizes if the current job has finished and the \emph{GoodQuality} attribute represents the number of acceptable quality products produced. 
 
 \begin{table}[ht]
 \caption{ERP system data}
@@ -213,46 +166,24 @@ JobId & ProductId & JobStart & JobEnd &  JobFinished & GoodQuality\\
 \end{tabular}
 \end{table}
 
+Further, Table~\ref{example2} displays some of the attributes of the ERP system data that may be used for analysis purposes \emph{(JobId, ProductId, JobStart (date and time), JobEnd (date and time), JobFinished, GoodQuality)}. As mentioned earlier, ERP system data has 164 attributes, in total. The \emph{JobId} represents the given job. The \emph{productId} represents a specific product. The \emph{JobStart} represents the date and time when a job starts. Similarly, \emph{JobEnd} represents the date and time when a job ends. A job may be carried out in multiple time intervals as seen in Table~\ref{example2}. The \emph{JobFinished} characterizes if the current job has finished and the \emph{GoodQuality} attribute represents the number of acceptable quality products produced. 
+
 Furthermore, several interesting subsets may be identified from the initial insights of the data sets that leads to hypothesis regarding initial data patterns. For example, whether screwing machine errors causes more machine stops than faulty PARs. 
 
 
 
-
- 
-
 \section {Data Preprocessing}
 \label{sec:datapreparation}
-\iffalse
-This section provides insight into the business problems before performing data modeling. The data preparation phase include activities, such as data selection, data transformation, data cleaning and data validation. Data preparation tasks may be performed several times and not in any given order. During this phase important issues are addressed like selecting the relevant data, cleaning of data, discarding unacceptable data and how the ERP system data can be integrated into the final data sets. Some of the cleaning techniques discussed in \cite{iftikhar} may be applicable here as well. Metadata originating from discussions between data scientists and domain experts has shown great importance in the process of data validation. Some meta issues can not be inferred from the sensor data but require domain expertise like: ``is the machine output reliable, when the `error sensor or alarm' is `on', can this be verified?". Logically the answer is ``yes", as during production of certain types of ladders the alarm is disregarded. Another anomaly is that the output showed double the numbers of ladders produced that actually produced. The reason is that the pace out sensor was triggered twice in the process of folding the ladder, this was subsequently corrected in the logging process. 
+This section provides insight into the business problems before performing data modeling. The data preprocessing phase include activities, such as data selection, data transformation, data cleaning and data validation. These tasks may be performed several times and not in any given order. During this phase important issues like selecting the relevant data, cleaning of data and discarding unacceptable data are addressed. Additionally, it is determined how the ERP system data can be integrated into the final data sets. Some of the cleaning techniques discussed in \cite{iftikhar} may be applicable here as well. Metadata originating from discussions between data scientists and domain experts has been crucial to the process of data validation. Some meta issues cannot be inferred from the sensor data but require domain expertise like: ``is the machine output reliable, when the `error sensor or alarm' is `on', can this be verified?". Contrary to logic, the answer is ``yes", as during production of certain types of ladders the alarm is disregarded. Another anomaly is that the logged data showed twice the numbers of ladders produced than actually was produced. The reason for this is that the pace out sensor was triggered twice in the process of folding the ladder, this was subsequently corrected in the logging process. 
 
-The other aspect of data validity is ``adequacy", ``is there sufficient amount of data variable to make valid predictions?". By examining data from one of the ladder machines where no output was generated the question ``why", arises. In this case, the  machine in question was jammed and the ladder machine could not deliver it’s output and hence stood still. An additional sensor would have enabled the predictive ability to identify why no output was produced. 
-
-Further, decisions about the format of the final data sets and granularity are also made at this phase. When addressing the data granularity, the maximum data sample rate is ``1 second", however, the data set shows that more than one sensor status changed within the limited time (see row 16 and 17 in Table~\ref{example}). It can seen in row 16 that the pace in and pace out sensors both have values ``1" at 09:56:31, as there is no change in the status of the sensors at 09:56:32 for that reason no row has been recorded. Similarly, row 17 shows that pace in and pace out sensors both have values ``0" at 09:56:33, which means that multiple sensors status changes within 1 second. Based on this observation, when trying to establish a relation it is important to know if \emph{PaceIn} follows \emph{PaceOut} or \emph{PaceOut} follows \emph{PaceIn}, hence the used method of checking/recording sensors status at a granularity of 1 second may not be a good option, it should be at a finer granularity, such as 500 milliseconds or better.
-Another aspect of data preparation phase is to perform exploratory analysis. The focus of this paper is on exploratory data analysis rather than data cleansing or validation for that reason only exploratory analysis is further discussed.
-\fi
-This section provides insight into the business problems before performing data modeling. The data preprocessing phase include activities, such as data selection, data transformation, data cleaning and data validation. These tasks may be performed several times and not in any given order. During this phase important issues like selecting the relevant data, cleaning of data and discarding unacceptable data are addressed. In addition, it is investigated how the ERP system data can be integrated into the final data sets. Some of the cleaning techniques discussed in \cite{iftikhar} may be applicable here as well. Metadata originating from discussions between data scientists and domain experts has shown great importance in the process of data validation. Some meta issues cannot be inferred from the sensor data but require domain expertise like: ``is the machine output reliable, when the `error sensor or alarm' is `on', can this be verified?". Logically the answer is ``yes", as during production of certain types of ladders the alarm is disregarded. Another anomaly is that the logged data showed twice the numbers of ladders produced than actually was produced. The reason for this is that the pace out sensor was triggered twice in the process of folding the ladder, this was subsequently corrected in the logging process. 
-
-The other aspect of data validity is ``adequacy", ``is there sufficient amount of data variable to make valid predictions?". By examining data from one of the ladder machines where no output was generated the question ``why", arises. In this case, the  machine in question was jammed and the ladder machine could not deliver it’s output and hence stood still. An additional sensor would have enabled the predictive ability to identify why no output was produced. Further, decisions about the format of the final data sets and time granularity are also made at this phase. When addressing the data granularity, the maximum data sample rate is ``1 second", however, the data set shows that more than one sensor status changed within the limited time (see row 16 and 17 in Table~\ref{example}). It can seen in row 16 that the pace in and pace out sensors both have values ``1" at 09:56:31, as there is no change in the status of the sensors at 09:56:32 for that reason no row has been recorded. Similarly, row 17 shows that pace in and pace out sensors both have values ``0" at 09:56:33, which means that multiple sensors status changes within 1 second. Based on this observation, when trying to establish a relation it is important to know if \emph{PaceIn} follows \emph{PaceOut} or \emph{PaceOut} follows \emph{PaceIn}, hence the used method of checking/recording sensors status at a granularity of 1 second may not be a good option, it should be at a finer granularity, such as 500 milliseconds or even finer.
+The other aspect of data validity is ``adequacy", ``is there sufficient amount of data variable to make valid predictions?". By examining data from one of the ladder machines producing no apparent output the question ``why", arises. In this case, the machine in question was jammed and the ladder machine could not deliver its output and hence stood still. An additional sensor would have enabled the predictive ability to identify why no output was produced. Further, decisions about the format of the final data sets and time granularity are also made at this phase. When addressing the data granularity, the maximum data sample rate is ``1 second", however, the data set shows that more than one sensor status changed within the limited time (see row 16 and 17 in Table~\ref{example}). At 09:56:31 row 16 shows that the pace in and pace out sensors both have values ``1". At 09:56:32 no sensor changed state hence no registration was recorded. At 09:56:33 row 17 shows that the pace in and pace out sensors both have values ``0", which means that multiple sensors changed state within the granularity of 1 second. Based on this observation, and as it is important to know if \emph{PaceIn} follows \emph{PaceOut} or \emph{PaceOut} follows \emph{PaceIn} in order to form a relation the used method of checking/recording sensors status at a granularity of 1 second is not sufficient. A finer granularity, such as 500 milliseconds or even finer is required.
 
 Another aspect of the data preprocessing phase is to perform descriptive statistical analysis and visualization. The focus of this paper is on statistical analysis rather than data cleansing. Hence, only descriptive analysis and visualization are further discussed.
 
-\iffalse
-\subsection{Data Pipeline}
-\label{sec:datapipeline}
-The proposed data pipeline consists of digesting or processing raw data, extracting meaningful features and applying machine learning model. Fig.~\ref{fig:pipeline1} presents the data pipeline along with the proposed technologies. This pipeline is not specific to Dolle and may easily be adapted to other situations. At data acquisition step, raw data is collected from multiple data sources and stored at a central repository. Data acquisition can be performed with Python, R or Scala. Next, a data wrangling step transforms the data into a canonical data format that is used for further processing and analysis. Data cleaning, reduction and integration also takes place at this stage. Further, data exploration step performs initial descriptive analysis and visualization. For data wrangling and exploration, Python's \emph{pandas}, Scala's \emph{slick} and R's \emph{dplyr} are recommended technologies, where as, for visualization Python's \emph{matplotlib} and \emph{seaborn}, Scala's \emph{vegas} and R's \emph{ggplot2} are powerful technologies. Furthermore, data modeling step is the general concept of building a model that is capable of making predictions. For predictive modeling, Python's \emph{tensorflow} and \emph{scikit-learn}, Scala's \emph{spark mllib \& ml} and R's \emph{h2o} are well known technologies. In addition, the dashboard may displays the intput/output pace, the overall equipment effectiveness in near real-time. For dashboard, Python's \emph{dash} and \emph{boken}, Scala's \emph{flink} and R's \emph{shiny} are typical technologies.
-
-\begin{figure}
-\centering
-\includegraphics[width=0.85\textwidth]{pipeline2} 
-\caption{Proposed data pipeline}
-\label{fig:pipeline1}
-\end{figure}
-
-\fi
 
 \subsection{Descriptive Statistics and Visualization }
 \label{sec:dataanalysis}
-Descriptive data analysis is primarily a graphic approach that provides a first insight into the data. The two main characteristics of descriptive analysis \emph{honesty} and \emph{trust}. Honesty means that the data scientist should be open to all possibilities prior to exploring the data, whereas, trust means that the impression, data is making, is not deceiving. There are no formal/standard set of rules that can be used in descriptive analysis, however, common approaches are: summary statistics, correlation, visualization and aggregation. Summary statistics or univariate analysis is the first step that helps us to understand data. Univariate analysis is the simplest form of data analysis where the data being analyzed contains only one variable. Further, data correlation or multivariate analysis helps us to find relationships between two or more variables. Finding connections between variables also has a crucial impact on choosing and building the predictive model(s). 
+Descriptive data analysis is primarily a graphic approach that provides a first insight into the data. The two main characteristics of descriptive analysis are \emph{honesty} and \emph{trust}. Honesty means that the data scientist should be open to all possibilities prior to exploring the data, whereas, trust means that the impression, data is making, is not deceiving. There are no formal/standard set of rules that can be used in descriptive analysis, however, common approaches are: summary statistics, correlation, visualization and aggregation. Summary statistics or univariate analysis is the first step that helps us to understand data. Univariate analysis is the simplest form of data analysis where the data being analyzed contains only one variable. Further, data correlation or multivariate analysis helps us to find relationships between two or more variables. Finding connections between variables also has a crucial impact on choosing and building the predictive model(s). 
 
 \begin{table}[ht]
 \caption{Univariate analysis}
@@ -276,21 +207,21 @@ Kurtosis & 41.50  & -1.61 & -0.53  & 36.24  & 7.53 & -1.99\\
 
  \begin{figure}
 \centering
-    \includegraphics[width=0.6\textwidth]{heatmap}
+    \includegraphics[width=0.55\textwidth]{heatmap}
   \caption{Sensor and alarm correlation heat map}
   \label{fig:correlation1}
 \end{figure}
 
-Data visualization helps us to gain perspective into the data, such as to find anomalies and to detect outliers. Finally, data aggregation helps us to group data from coarser to finer granularities in order to improve understanding due to the limited nature of data. Table~\ref{example3} (univariate descriptive analysis) shows mean, standard deviation, minimum, maximum, skewness and kurtosis. The most interesting findings in Table~\ref{example3} are skewness and kurtosis. Skewness is a measure of symmetry and kurtosis is a measure of  tailedness. Table~\ref{example3}, illustrates that \emph{MachineOn} variable is extremely skewed towards right side (98\% of the rows shows that machine is on). \emph{FaultyString} and \emph{ScrewError} variables are also extremely skewed towards left. Similarly, \emph{MachineOn} and \emph{FaultyString} variables have very high positive Kurtosis values that means that \emph{MachineOn} is substantially peaked towards 1 and \emph{FaultyString} is peaked towards 0. As, for perfectly symmetrical data the skewness is 0 and kurtosis is 3 for that reason it can be concluded that at least half of the variables of the machine data  are highly skewed/peaked towards either 1 or 0.
+Data visualization helps us to gain perspective into the data, such as to find anomalies or to detect outliers. Finally, data aggregation helps us to group data from coarser to finer granularities in order to improve understanding due to the limited nature of data. Table~\ref{example3} (univariate descriptive analysis) shows mean, standard deviation, minimum, maximum, skewness and kurtosis. The most interesting findings in Table~\ref{example3} are skewness and kurtosis. Skewness is a measure of symmetry and kurtosis is a measure of  tailedness. Table~\ref{example3}, illustrates that \emph{MachineOn} variable is extremely skewed towards right side (98\% of the rows shows that machine is on). \emph{FaultyString} and \emph{ScrewError} variables are also extremely skewed towards left. Similarly, \emph{MachineOn} and \emph{FaultyString} variables have very high positive Kurtosis values that means that \emph{MachineOn} is substantially peaked towards 1 and \emph{FaultyString} is peaked towards 0. As, for perfectly symmetrical data the skewness is 0 and kurtosis is 3 for that reason it can be concluded that at least half of the variables of the machine data  are highly skewed/peaked towards either 1 or 0.
 
 \begin{figure}
 \centering
-    \includegraphics[width=0.8\textwidth]{heatmap222}
+    \includegraphics[width=0.75\textwidth]{heatmap222}
   \caption{Sensor and alarm (aggregated at daily granularity) correlation heat map \cite{nadeem}}
   \label{fig:correlation2}
 \end{figure}
 
-In addition, correlation matrices are constructed to carry out multivariate descriptive analysis. The correlation matrix of the sensor and the alarm variables at second granularity (Fig.~\ref{fig:correlation1}) shows no interdependence. For that reason, data is being aggregated at daily granularity by job. Fig.~\ref{fig:correlation2}, shows some interesting positive and negative correlations. The correlations with respect to \emph{PaceIn}, \emph{PaceOut}, \emph{ScrewError}, \emph{FaultyString}, \emph{MachineOff}, number of unplanned \emph{MachineStops} and \emph{DownTime} are of particular interest. Due to the fact that one of the main aims of this analysis is to figure out which factors slow down the production and eventually triggers the machine to stop or stand still. The correlation coefficient value normally locates between -1 and +1. The coefficient values between \emph{PaceIn}/\emph{PaceOut} and \emph{FaultyString}/\emph{MachineStops} (-0.35 and +0.37) indicate both weak negative and positive correlations. Further, the coefficient values between \emph{ScrewError}/\emph{FaultyString} and \emph{MachineStops} (+0.37 and +0.38) indicate weak positive correlations.  Moreover, the coefficient values  between \emph{DownTime} and \emph{JobDuration}/\emph{MachineOff} duration (+0.54 and +0.96) indicate moderate to strong positive correlations. Hence, it can be concluded that \emph{ScrewError} and \emph{FaultyString} both have weak to moderate effect on the number of unplanned \emph{MachineStops}, however, the duration of these stops have a strong positive correlation with machine \emph{DownTime}. 
+In addition, correlation matrices are constructed to carry out a multivariate descriptive analysis. The correlation matrix of the sensor and the alarm variables at 1 second granularity (Fig.~\ref{fig:correlation1}) shows no interdependence. For that reason, data is being aggregated at daily granularity by job. Fig.~\ref{fig:correlation2}, shows some interesting positive and negative correlations. The correlations with respect to \emph{PaceIn}, \emph{PaceOut}, \emph{ScrewError}, \emph{FaultyString}, \emph{MachineOff}, number of unplanned \emph{MachineStops} and \emph{DownTime} are of particular interest. Due to the fact that one of the main aims of this analysis is to figure out which factors negatively impact the production and/or triggers machine stoppage. The correlation coefficient value normally locates between -1 and +1. The coefficient values between \emph{PaceIn}/\emph{PaceOut} and \emph{FaultyString}/\emph{MachineStops} (-0.35 and +0.37) indicate both weak negative and positive correlations. Further, the coefficient values between \emph{ScrewError}/\emph{FaultyString} and \emph{MachineStops} (+0.37 and +0.38) indicate weak positive correlations.  Moreover, the coefficient values  between \emph{DownTime} and \emph{JobDuration}/\emph{MachineOff} duration (+0.54 and +0.96) indicate moderate to strong positive correlations. Hence, it can be concluded that \emph{ScrewError} and \emph{FaultyString} both have weak to moderate effect on the number of unplanned \emph{MachineStops}, however, the duration of these stops have a strong positive correlation with machine \emph{DownTime}. 
 
 \begin{figure}
 \centering
@@ -302,21 +233,21 @@ In addition, correlation matrices are constructed to carry out multivariate desc
 
  \begin{figure}
 \centering
-\includegraphics[width=0.80\textwidth]{sensordata22} 
+\includegraphics[width=0.76\textwidth]{sensordata22} 
 \caption{Sensor and alarm data overview \cite{nadeem}}
 \label{fig:sensordataoverview}
 \end{figure}
 
-The status of the machine, screw errors and faulty strings can also be viewed in Fig.~\ref{fig:status} (a-c). It is quite obvious that screw machine errors and faulty strings are causing a high percentage of machine stops (white holes in the data set). Further, Fig.~\ref{fig:sensordataoverview} (a-d) provide an overview of the sensor and alarm data at hourly and daily granularities, respectively. It is seen in Fig.~\ref{fig:sensordataoverview} (a) that the machine is on almost all the time. The pace of the incoming strings is also fine with very few stops, however, the pace of outgoing ladders has some stops. The outgoing pace slows down (Fig.~\ref{fig:sensordataoverview} (c)) between 07:15 and 07:20 as well as between 07:45 and 07:55. These slow downs are partly caused by errors in the screw machine, also both these slow downs trigger the alarm. Similarly,  Fig.~\ref{fig:sensordataoverview} (b) demonstrates that the machine is on most of the time, incoming pace slows down between 16:00 and 21:00 mainly due to faulty strings that also slow down the outgoing pace (Fig.~\ref{fig:sensordataoverview} (d)).
+The status of the machine, screw errors and faulty PARs can also be viewed in Fig.~\ref{fig:status} (a-c). It is quite obvious that screwing machine errors and faulty PARs are causing a high percentage of machine stoppages (white holes in the data set). Further, Fig.~\ref{fig:sensordataoverview} (a-d) provide an overview of the sensor and alarm data at hourly and daily granularities, respectively. It is seen in Fig.~\ref{fig:sensordataoverview} (a) that the machine is on almost all the time. The pace of the incoming PARs is also fine showing very few stops, however, the pace of outgoing ladders show some stops. The outgoing pace slows down (Fig.~\ref{fig:sensordataoverview} (c)) between 07:15 and 07:20 as well as between 07:45 and 07:55. These slow downs are partly caused by errors in the screwing machine, and additionally these slow downs trigger the alarm. Similarly,  Fig.~\ref{fig:sensordataoverview} (b) demonstrates that the machine is on most of the time, incoming pace slows down between 16:00 and 21:00 mainly due to faulty PARs that also slow down the outgoing pace (Fig.~\ref{fig:sensordataoverview} (d)).
 
 \begin{figure}
 \centering
-\includegraphics[width=0.77\textwidth]{PaceINOUT444} 
+\includegraphics[width=0.75\textwidth]{PaceINOUT444} 
 \caption{Detailed data analysis at daily granularity \cite{nadeem}}
 \label{fig:detailedanalysis}
 \end{figure}
 
-Moreover, the results of the detailed analysis at daily granularity are illustrated in Fig.~\ref{fig:detailedanalysis} (a-b). Fig.~\ref{fig:detailedanalysis} (a), shows that there are opportunities both for undertaking more jobs as well as for increasing the machine on duration. Likewise, machine off duration and downtime are also quite significant. Screw machine errors are little more frequent than  faulty strings and definitely alarm duration is also quite high. Fig.~\ref{fig:detailedanalysis} (b) presents the frequency of products produced, screw machines errors, faulty strings, alarms and stops. The frequency of the screw machine errors, the alarms and the machine stops are noticeable. Further, Fig.~\ref{fig:pace} (a-b) reveals the pace of  incoming strings and outgoing ladders. Fig.~\ref{fig:pace} (a), exhibits the ideal incoming and outgoing pace of the two main categories of ladders. The ideal average incoming pace is 9.5 seconds, whereas, the ideal average outgoing pace is 60 seconds. In addition, Fig.~\ref{fig:pace} (b), displays the actual incoming and outgoing pace at daily level. The actual average incoming pace is 15.5 seconds and the actual outgoing pace is 93.5 seconds. Hence, there is a clear possibility of optimizing both the incoming and outgoing pace.
+Moreover, the results of the detailed analysis at daily granularity are illustrated in Fig.~\ref{fig:detailedanalysis} (a-b). Fig.~\ref{fig:detailedanalysis} (a), shows that there are opportunities both for undertaking more jobs as well as for improving the machine on duration. Likewise, machine off duration and downtime are also quite significant. Screwing machine errors are little more frequent than faulty PARs and noticeably the alarm duration is also quite high. Fig.~\ref{fig:detailedanalysis} (b) presents the frequency of products produced, screwing machines errors, faulty PARs, alarms and stops. The frequency of the screwing machine errors, the alarms and the machine stops are noticeable. Further, Fig.~\ref{fig:pace} (a-b) reveals the pace of  incoming PARs and outgoing ladders. Fig.~\ref{fig:pace} (a), exhibits the ideal incoming and outgoing pace of the two main categories of ladders. The ideal average incoming pace is 9.5 seconds, whereas, the ideal average outgoing pace is 60 seconds. In addition, Fig.~\ref{fig:pace} (b), displays the actual incoming and outgoing pace at daily level. The actual average incoming pace is 15.5 seconds and the actual outgoing pace is 93.5 seconds. Hence, there is a clear possibility of optimizing both the incoming and outgoing pace.
 
 \begin{figure}
 \centering
@@ -325,48 +256,17 @@ Moreover, the results of the detailed analysis at daily granularity are illustra
 \label{fig:pace}
 \end{figure}
 
-To summarize, the descriptive analysis discloses that data is not uniformly distributed and almost half of the variables are highly skewed. Moreover, due to the binary nature of data, correlation matrices only reveal weak interdependence between the variables. In addition, visualisation and aggregations confirm that screw machines errors are causing more machine stops than faulty strings and machine downtime needs to be reduced. In addition, to give these findings a commercial value a learning loop must be introduced where the finding are followed by actions and new data is compared to ``old" data to check if actions have the anticipated effect.
+To summarize, the descriptive analysis discloses that data is not uniformly distributed and almost half of the variables are highly skewed. Moreover, due to the binary nature of data, correlation matrices only reveal weak interdependence between the variables. In addition, visualisation and aggregations confirm that screwing machines errors are causing more machine stops than faulty PARs and that machine downtime needs to be reduced. In addition, to give these findings a commercial value a learning loop must be introduced where the finding are followed by actions and new data is compared to ``old" data to check if actions have the anticipated effect.
   
 
 
  
 
-
-
-
-
-
-
-
-
-
-
-
 \section {Predictive Analysis}
 \label{sec:modeling}
-
-
-
-
-
-
-\iffalse
-
-supervised approach
-unsupervised approach
-semi-supervised approach
-Various forecasting methods will be used to predict patterns. Pre-dictive data analysis and modeling includes unsupervised and supervised machine learning, statistical in-ference, and prediction. A wide variety of machine learning algorithms are available, including k-nearest neighbors, naïve Bayes, decision trees, support vector machines, logistic regression, k-means, and so on. The choice of method to be deployed depends on the problem definition discussed in the first step and the type of collected data. The final product of this step is a model inferred from the data.
-
-choose a model from the given approach
-determine model assumptions
-prepare input data
-\fi
-
 This section introduces the basic concepts of machine learning based models, data aggregation and explains some of the key issues such as imbalanced data. One of the main goals of this case study is ``to predict the machine's unplanned stops depending on historical consequences/patterns". Based on the kind of data available and the research question/goal, supervised machine learning is used to predict when the machine is going to stop. Supervised learning algorithms train from historical data, such as machine is on ``1" or off ``0".  The algorithm determines which label should be given to new data based on historical patterns. Most commonly used classification algorithms in machine learning are logistic regression, artificial neural networks, support vector machines (SVM), k-nearest neighbors (KNN), decision trees, auto-regressive integrated moving average (ARIMA), naive bayes and so on \cite{gooijer}. In this paper, logistic regression, support vector machines, k-nearest neighbors, decision trees and artificial neural networks are used, however, due to space limitation only logistic regression and neural networks are further explained.
 
-%Moreover, frequently used classification algorithms in deep learning are convolutional neural networks (CNN), recurrent neural networks (RNN), artificial neural networks (ANN) and so on. Similarly, various sub-types within each of them also exists. In this paper, artificial neural networks are used for the reason that ANN performs better with binary classification.
 
-%All the models perform classification by classifying the binary dependent variable into either zero or one.
 \subsection {Machine Learning based Models}
 
 \subsubsection {Logistic Regression}
@@ -439,21 +339,20 @@ The output layer activation function presented in Equation~\ref{eq:eq14} is the 
 
 Further, a single hidden layer neural network for the sensor binary data is presented in Fig.~\ref{fig:neuralnetwork}. Where, the input layer consists of the sensor values, such as pace in, pace out and so on. The hidden (middle) layer, uses Rectified Linear Unit (ReLU) activation function. The purpose of  ReLU is to calculate the intermediate result values for each node in the hidden layer (Equation~\ref{eq:eq13}). The input to the ReLU activation function is the sum of the product of the input sensor values with the first set of weights and the output is the intermediate result values. Finally, the output layer, uses Sigmoid activation function to determine the final output value. The input to the Sigmoid activation function is the sum of the product of the hidden layer intermediate result values with the second set of weights and the output is the final output value. Initially, the sets of weights are selected randomly by using Gaussian distribution (forward propagation) and afterwards backward propagation computes the margin of error of the final output value and update the sets of weights. 
 
-\iffalse
 
-nadeem
-\fi
 
 \subsection {Data Aggregation}
 \label{sec:aggregation}
+\iffalse
 
 When working with time-series forecasting we often have to choose between a few potential models and the best way is to test each model in pseudo-out-of-sample estimations. In other words, we simulate a forecasting situation where we drop some data from the estimation sample to see how each model perform.
 
 A group of sensor values in a fixed sized window (15 consecutive sensor readings) are taken and convert them to an aggregated outcome in an effort to normalize the data. This pattern is then mapped into memory. Next, the current pattern is compared to all previous patterns. The pattern is compared to all the previous patterns. If their percent similarity is more than a certain threshold, then it will be considered. Afterwards, move forward one reading (row) and re-map the pattern. From here, 20-30 comparable patterns from history can be gathered. With these similar patterns, we can then aggregate all of their outcomes, and come up with an estimated "average" outcome. With that average outcome, if it is very favorable, then we might say that machine is working fine. If the outcome is not favorable, maybe we say that machine is going to “stop”.
+\fi
 
 \subsection {Imbalanced Data}
 \label{sec:imbalanced}
-Four classification based supervised machine learning models are used to predict that whether the machine is on or off. Table~\ref{example3}, demonstrates the \emph{accuracy} of these models. Accuracy is a commonly used approach in classification models. It checks the percentage of correct predictions. The accuracy of the models with detailed data is 98\% and with aggregated data, it is 90\%, which means that the models are only predicting the majority class that is ``machine is on". It is also demonstrated in the descriptive analysis (Section~\ref{sec:datapreparation}) that the data set is not uniformly distributed. 
+In this subsection, four classification based supervised machine learning models are used to predict that whether the machine is on or off. Table~\ref{example3}, demonstrates the \emph{accuracy} of these models. Accuracy is a commonly used approach in classification models. It checks the percentage of correct predictions \cite{book}. The accuracy of the models with detailed data is 98\% and with aggregated data, it is 90\%, which means that the models are only predicting the majority class that is ``machine is on". It is also demonstrated in the descriptive analysis (Section~\ref{sec:datapreparation}) that the data set is not uniformly distributed. 
 
 \begin{table}[ht]
 \caption{Predicted accuracy of the models on imbalanced data}
@@ -474,9 +373,8 @@ Decision tree &        98\% & 91\%   \\
 \end{tabular}
 \end{table}
 
+
 Similarly, Fig.~\ref{fig:machineon2},  confirms that Machine on/off data is completely imbalanced. Out of 1.2 million instances only in 25,000 instances the machine is off. Even though the duration of these stops (downtime) is considerable (Fig.~\ref{fig:detailedanalysis} (a)), still their frequency is only 2\%. Meanwhile, majority of the machine learning algorithms presume that the data samples are divided equally among the classes for that reason the predictions for minority target class ``machine is off" leads to incorrect results.
-
-
 
 \begin{figure}
 \centering
@@ -487,35 +385,11 @@ Similarly, Fig.~\ref{fig:machineon2},  confirms that Machine on/off data is comp
 
 
 
-\subsubsection {Random Data Sampling}
+
+
+\subsection {Random Data Sampling}
 \label{sec:sampling}
-As, the minority target class ``machine is off" is the main focus of prediction, thus the data set has to be resampled. Two common approaches are \emph{oversampling} that is to add instances of the minority class ``machine is on" and \emph{undersampling} that is to delete instances of the majority class ``machine is on" \cite{Gonzales}. In this paper, both undersampling and oversampling are used to adjust the class distribution of the sensor data set. Undersampling divides the machine on/off frequency into a 50/50 ratio that means, randomly selecting 25,000 instances where ``machine is on" and 25,000 instances where ``machine is off". Underssampling, dramatically reduces the sample size by discarding useful data, however, the predictions are not biased. On the other hand, oversampling creates synthetic data from the minority class to reach an equal balance between the minority and majority classes. In oversampling, most of the data is retained since no rows are deleted. Oversampling increases the chances of \emph{overfitting} for the reason that it duplicates the existing data. Overfitting occurs when a model can memorize the training data. based on that memorization it makes correct predictions if the test data is exactly similar to the training data, otherwise makes incorrect predictions with unseen test data.
-
-\begin{table}[ht]
-\caption{Average scores}
-\label{example4}
-\centering
-\begin{tabular}{ccccc}
-\hline\noalign{\smallskip}
- & Undersampled & Undersampled & Oversampled & Oversampled \\
-  & (Detailed data) & (Aggregated data) & (Detailed data) & (Aggregated data) \\
-  
-\noalign{\smallskip}
-\hline
-\noalign{\smallskip}
-Accuracy      &        68\% &68\% &73\% &56\% \\
-Precision     &         69\% & 69\% &99\% & 89\%\\
-Recall         &        66\% & 67\% &72\% & 56\%  \\
-\hline
-\end{tabular}
-\end{table}
-
-Moreover, logistic regression, support vector machine, k-nearest neighbors and decision tree are used to predict that whether the ``machine is on or off" using undersampled and oversampled data. Table~\ref{example4}, presents the accuracy, \emph{precision} and \emph{recall} scores of these models. Precision means that how valuable the prediction results are and recall means that how comprehensive the prediction results are. The accuracy, precision and recall of the models with undersampled data set is almost same and approximately 68\%. In contrast, the accuracy, precision and recall with the oversampled data set is variable. Oversampled detailed data has a very high precision and high accuracy and recall. Similarly, oversampled aggregated data has high precision with low accuracy and recall.
-
-
-
-
-
+As, the minority target class ``machine is off" is the main focus of prediction, thus the data set has to be resampled. Two common approaches are \emph{oversampling} that is to add instances of the minority class ``machine is off" and \emph{undersampling} that is to delete instances of the majority class ``machine is on" \cite{Gonzales}. In this paper, both undersampling and oversampling are used to adjust the class distribution. 
 
 \begin{figure}
 \centering
@@ -524,86 +398,17 @@ Moreover, logistic regression, support vector machine, k-nearest neighbors and d
 \label{fig:machineon}
 \end{figure}
 
+Undersampling divides the machine on/off frequency into a 50/50 ratio that means, randomly selecting 25,000 instances where ``machine is on" and 25,000 instances where ``machine is off". Underssampling, dramatically reduces the sample size by discarding useful data, however, the predictions are not biased. On the other hand, oversampling creates synthetic data from the minority class to reach an equal balance between the minority and majority classes. In oversampling, most of the data is retained since no rows are deleted. Oversampling increases the chances of \emph{overfitting} for the reason that it duplicates the existing data. Overfitting occurs when a model can memorize the training data. Based on that memorization it makes correct predictions if the test data is exactly same as the training data, otherwise makes incorrect predictions with unseen test data. 
 
 
 
+Moreover, in order to decide which machine learning model(s) will be more effective in correctly identifying the status of the machine (on or off) in the random undersampling subset, \emph{receiver operating characteristic curve (ROC)} \cite{book} is used. ROC curve is a graph showing the performance of a binary classification model that how good the model accurately separate between two events e.g. if a machine is on or off. It can be seen in Fig.~\ref{fig:machineon} that in detailed and aggregated data in the random undersampling subset, logistic regression and support vector machine models achieve quite a good performance to distinguish between the positive and the negative values. The ROC curve scores of these two models are 0.88 and 0.75, respectively. Later in this paper (Section~\ref{sec:evaluation}), a neural network is created and its accuracy is compared with one of the best models, logistic regression or support vector machine based on under as well as over sampled data.
 
 
-
-
-
-
-
-
-
-
-
-
-\iffalse
-Number of data points in the minority class. Picking the indices of the normal classes. Out of the indices we picked, randomly select "x" number (numberrecordsfraud). Appending the 2 indices. Under sample dataset.
-Splitting data into train and test set. Cross validation will be used when calculating accuracies.
-
-
-
-\noindent
-\begin{verbatim}
-1 X = df.loc[:, df.columns != 'MachineOn']
-2 y = df.loc[:, df.columns == 'MachineOn']
-3 machineoff = len(df[df.MachineOn == 0])
-4 machineoff_indices = np.array(df[df.MachineOn == 0].index)
-5 machineon_indices = df[df.MachineOn == 1].index
-6 random_machineon_indices = np.random.choice(machineOn_indices, 
-    number_records_machineOff, replace = False)
-7 random_normal_indices = np.array(random_machineOn_indices)
-8 under_sample_indices = np.concatenate([machineOff_indices,
-    random_machineOn_indices])
-9 under_sample_data = df.iloc[under_sample_indices,:]
-10 X_undersample = under_sample_data.ix[:, 
-    under_sample_data.columns != 'MachineOn']
-11 y_undersample = under_sample_data.ix[:, 
-    under_sample_data.columns == 'MachineOn']
-\end{verbatim}
-\noindent
-
-
-
-
-
-
-Logistic regression classifier - Undersampled data
-
-
-
-\fi
-
-
-
-
-\iffalse
-
-evaluate the model with some performance measure 
-consult the domain expert
-Takt time is the average time between the start of production of one unit and the start of production of the next unit, when these production starts are set to match the rate of customer demand. For example, if a customer wants 10 units per week, then, given a 40-hour work week and steady flow through the production line, the average time between production starts should be 4 hours (actually less than that in order to account for things like machine downtime and scheduled paid employee breaks), yielding 10 units produced per week.
-\section {Near Real-time Dashboard}
-\label{sec:dashboard}
-\fi
-%check if the model assumptions are satisfied
-%set up initial parameters
-%run a model
-%\fi
-%\iffalse
-
-\iffalse
-
-nadeem
-\fi
 
 \section {Evaluation}
 \label{sec:evaluation}
 \subsection{Overall Equipment Effectiveness}
-\iffalse
-This section evaluates the Overall Equipment Effectiveness (OEE)  of Dolle's manufacturing process. OEE calculates the percentage of manufacturing time that is actually productive. It can be used as a benchmark as well as a baseline. It is one of the most widely used standards to calculate productivity in manufacturing industry. In general, OEE consists of three factors, which are \emph{availability}, \emph{performance} and \emph{quality} \cite{oee}. Availability considers all the incidents that stop the planned production. Performance considers those events that causes the manufacturing process to run at less optimal speed. Where as, quality takes into consideration the manufactured products that do not meet the quality standards. An OEE score of 100\% means that the manufacturing is going along at an optimal pace, without any unplanned stops and producing only good quality products. 
-\fi
 In this section Dolle's manufacturing process is evaluated. This is done by computing the Overall Equipment Effectiveness (OEE) of the manufacturing process. OEE calculates the percentage of manufacturing time that is actually productive. It can be used as a benchmark as well as a baseline. It is one of the most widely used standards to calculate productivity in manufacturing industry. In general, OEE consists of three factors, which are \emph{availability}, \emph{performance} and \emph{quality} \cite{oee}. Availability considers all the incidents that stop the planned production. Performance considers those events that causes the manufacturing process to run at less optimal speed. Where as, quality takes into consideration the part of the manufactured products that do not meet quality standards. An OEE score of 100\% means that the manufacturing is going along at a perfect pace, without any unplanned stops and producing only good quality products. 
 
 \begin{table}[]
@@ -626,11 +431,7 @@ Reject count & 2 ladders\\
 \label{tab:data}
 \end{table}
 
-\iffalse
-To provide a clear picture of the productivity and the areas for further improvements the OEE calculation of Dolle's manufacturing process is performed based on the items and data mentioned in Table~\ref{tab:data}. In order to calculate OEE, these steps are followed. First, \emph{Planned Production Time (PPT)} and \emph{Run Time (RT)} are calculated. The Planned Production Time is the standard shift time excluding the planned breaks, such as lunch/coffee breaks as well as shift change over time. The Run Time is the actual time of production excluding both the planned and unplanned stops, such as job/product switch over stops, stops caused by faulty string or by screw machine error and so on. Afterwards, \emph{Good Count (GC)} is calculated by rejecting the defected ladders.\\
-\fi
-
-Based on the items and data mentioned in Table~\ref{tab:data} the OEE can be computed. The OEE will provide a clear picture of the productivity and possibilities for improvements. In order to calculate OEE, the following steps are performed. First, \emph{Planned Production Time (PPT)} and \emph{Run Time (RT)} are calculated. The Planned Production Time is the standard shift time excluding the planned breaks, such as lunch/coffee breaks as well as shift change over time. The Run Time is the actual time of production excluding both the planned and unplanned stops, such as job/product switch over stops, stops caused by faulty string or by screw machine error and so on. Afterwards, \emph{Good Count (GC)} is calculated by rejecting the defected ladders.\\
+Based on the items and data mentioned in Table~\ref{tab:data} the OEE can be computed. The OEE will provide a clear picture of the productivity and possibilities for improvements. In order to calculate OEE, the following steps are performed. First, \emph{Planned Production Time (PPT)} and \emph{Run Time (RT)} are calculated. The Planned Production Time is the standard shift time excluding the planned breaks, such as lunch/coffee breaks as well as shift change over time. The Run Time is the actual time of production excluding both the planned and unplanned stops, such as job/product switch over stops, stops caused by faulty string or by screwing machine error and so on. Afterwards, \emph{Good Count (GC)} is calculated by rejecting the defected ladders.\\
 
 
 \emph{PPT: Shift Length - Breaks = 510 minutes - 60 minutes = 450 minutes}\\
@@ -639,9 +440,6 @@ Based on the items and data mentioned in Table~\ref{tab:data} the OEE can be com
 
 \emph{GC: Total Count - Reject Count = 260 ladders - 2 ladder = 258 ladders} \\
 
-\iffalse
-Next, \emph{Availability (A)}, \emph{Performance (P)} and \emph{Quality (Q)} are calculated. Availability, calculates the time when the manufacturing process is not running or machine is ``OFF'' for some reasons. It takes into account machine failure (unplanned stops) and setup for next job and/or adjustments (planned stops). Performance, estimates that whether the process is running at its optimal pace and quality concerns with quality standards of the products being produced.\\
-\fi
 
 Next, \emph{Availability (A)}, \emph{Performance (P)} and \emph{Quality (Q)} are to be calculated. Availability is the time when the manufacturing process is not running or the machine is ``OFF'' for some reasons. Availability takes machine failure (unplanned stops) and setup for next job and/or adjustments (planned stops) into account. Performance, estimates that whether the process is running at its optimal pace and quality concerns with quality standards of the products being produced.\\
 
@@ -653,12 +451,6 @@ Next, \emph{Availability (A)}, \emph{Performance (P)} and \emph{Quality (Q)} are
 \hspace{12mm} \emph{(60 seconds * 260 ladders)/(370 * 60 seconds) = 0.7027 = 70.27\%}\\
 
 \emph{Q: Good Count / Total count = 258 ladders/ 260 ladders = 0.9923 = 99.23\%}\\
-
-\iffalse
-Finally, the OEE score is computed by multiplying the availability, performance and quality. An OEE score of 57.33\% is fairly typical for automate manufacturing industry, however, it indicates there is significant opportunity for improvement in performance. The performance score can be improved by reducing the switch over time between the jobs, by identifying the reasons for machine stops and finally by tackling the major cause(s) of downtime and so on. An OEE score around 85\% is considered a world class for automate manufacturing, where as, an OEE score of 40\% or below is considered low.\\ 
-
-\emph{OEE: A * P * Q = 0.8222 * 0.7027 * 0.9923 = 0.5733 = 57.33\%}\\
-\fi
 
 Finally, the OEE score is computed by multiplying the availability, performance and quality.\\ 
 
@@ -685,18 +477,23 @@ Quality             & 99\%& 98\% &  97\% & 99\% & 98.50\%\\
 \end{table}
 
 
-\subsection{Performance of Machine Learning Models}
+\subsection{Testing of Machine Learning Models}
+
+\iffalse
 
 In this article, we show that logistic regression andartificial neural networks share common roots in sta-tistical pattern recognition, and how the latter modelcan be seen as a generalization of the former. 
 
 We brieflycompare these two methods with other popular classification algorithms from the machine learning field, suchask-nearest neighbors, decision trees, and support vec-tor machines.
 
 
-\iffalse
+
 ogistic re-gression (LR) and artificial neural networks (ANN).These models have their origins in two different com-munities (statistics and computer science), but sharemany similarities. sta-tistical pattern recognition
 
 This section measures the performance in terms of accuracy, precision and recall (Table~\ref{tab:evaluation}) of the chosen classification technique - logistic regression. Accuracy means that ``how often is the classifier correct?" Thus, the proposed algorithm has an accuracy of 80\%, that is, for each 100 ``machineOn = 1" or ``machineOn = 0" types it classified, 80 were correctly classified. Precision means that ``when the model predicts the positive result ``MachineOn = 1", how often is it correct?"
 \fi
+
+\iffalse
+
 
 \begin{table}[]
 \label{tab:distance}
@@ -713,17 +510,13 @@ Recall         &        64\%\\
 \label{tab:evaluation}
 \end{table}
 
-\iffalse
- Hence, the algorithm has a precision of 95\%, which means for every 100 ``MachineOn = 1" types it classified, 95 were correctly classified. Recall means that “when it is actually the positive result ``MachineOn = 1", how often does it predict correctly?” As a result, it has a recall of 64\% that means for each 100 ``MachineOn = 1" types it classified in the test data set, 64 were correctly classified.
-
-
 \fi
 
 
 
 
 
-
+\iffalse
 
 \begin{figure}
 \centering
@@ -739,9 +532,11 @@ Recall         &        64\%\\
 \label{fig:confusion}
 \end{figure}
 
+\fi
+
 \begin{figure}
 \centering
-\includegraphics[width=0.75\textwidth]{confustionmatrixNW} 
+\includegraphics[width=0.8\textwidth]{confustionmatrixNW} 
 \caption{confusion matrices}
 \label{fig:confusion}
 \end{figure}
@@ -760,97 +555,6 @@ Further, Fig.~\ref{fig:confusion} presents a confusion matrix using heat map. Th
 
 
 
-\iffalse
-
-
-
-
-
-drill down/ drill through analysis
-root cause analysis
-correlation analysis
-
-
-present root causes if possible
-define some actions based on the given insight
-\fi
-\iffalse
-
-\subsubsection{Sample Heading (Third Level)} Only two levels of
-headings should be numbered. Lower level headings remain unnumbered;
-they are formatted as run-in headings.
-
-\paragraph{Sample Heading (Fourth Level)}
-The contribution should contain no more than four levels of
-headings. Table~\ref{tab1} gives a summary of all heading levels.
-
-\begin{table}
-\caption{Table captions should be placed above the
-tables.}\label{tab1}
-\begin{tabular}{|l|l|l|}
-\hline
-Heading level &  Example & Font size and style\\
-\hline
-Title (centered) &  {\Large\bfseries Lecture Notes} & 14 point, bold\\
-1st-level heading &  {\large\bfseries 1 Introduction} & 12 point, bold\\
-2nd-level heading & {\bfseries 2.1 Printing Area} & 10 point, bold\\
-3rd-level heading & {\bfseries Run-in Heading in Bold.} Text follows & 10 point, bold\\
-4th-level heading & {\itshape Lowest Level Heading.} Text follows & 10 point, italic\\
-\hline
-\end{tabular}
-\end{table}
-
-
-\noindent Displayed equations are centered and set on a separate
-line.
-\begin{equation}
-x + y = z
-\end{equation}
-Please try to avoid rasterized images for line-art diagrams and
-schemas. Whenever possible, use vector graphics instead (see
-Fig.~\ref{fig1}).
-
-\begin{figure}
-\includegraphics[width=\textwidth]{fig1.eps}
-\caption{A figure caption is always placed below the illustration.
-Please note that short captions are centered, while long ones are
-justified by the macro package automatically.} \label{fig1}
-\end{figure}
-
-\begin{theorem}
-This is a sample theorem. The run-in heading is set in bold, while
-the following text appears in italics. Definitions, lemmas,
-propositions, and corollaries are styled the same way.
-\end{theorem}
-%
-% the environments 'definition', 'lemma', 'proposition', 'corollary',
-% 'remark', and 'example' are defined in the LLNCS documentclass as well.
-%
-\begin{proof}
-Proofs, examples, and remarks have the initial word in italics,
-while the following text appears in normal font.
-\end{proof}
-For citations of references, we prefer the use of square brackets
-and consecutive numbers. Citations using labels or the author/year
-convention are also acceptable. The following bibliography provides
-a sample reference list with entries for journal
-articles~\cite{ref_article1}, an LNCS chapter~\cite{ref_lncs1}, a
-book~\cite{ref_book1}, proceedings without editors~\cite{ref_proc1},
-and a homepage~\cite{ref_url1}. Multiple citations are grouped
-\cite{ref_article1,ref_lncs1,ref_book1},
-\cite{ref_article1,ref_book1,ref_proc1,ref_url1}.
-%
-% ---- Bibliography ----
-%
-% BibTeX users should specify bibliography style 'splncs04'.
-% References will then be sorted and formatted in the correct style.
-%
-% \bibliographystyle{splncs04}
-% \bibliography{mybibliography}
-%
-
-\fi
-
 \section{Related Work}
 \label{sec:relatedwork}
 In general, smart manufacturing covers a number of different technologies, such as, data processing or data analytics, connected devices as well as services, robotics and so on. 
@@ -863,23 +567,9 @@ As, it can be seen from the above mentioned literature, sensor data analysis in 
 \label{sec:conclusionandfuturework}
 This paper described the data (descriptive statistics analysis) and machine learning techniques built around the concept of industry 4.0. Descriptive statistics helped to describe and understand the features of data such as, correlation, skewness, kurtosis, class distribution and so on. This paper also revealed that descriptive analysis is necessary to build effective machine learning models. Further, various machine learning algorithms such as, logistic regression, neural networks, support vector machines, decision trees and k-nearest neighbors were applied on a historical data set to predict costly production line disruptions. The accuracy of the proposed machine learning models were tested on a real-world data set. The results have validated the effectiveness of the proposed models.
 
-
-
-\iffalse
-
-
-
-
-
-\fi
-
 For the future work, a near real-time anomaly detection mechanism using the machine learning models presented in this paper will be developed that can detect events that do not match to an expected pattern. In addition, a near real-time dashboard will be developed to display the input pace, output pace, screw errors, faculty strings, OEE score and so on.
 
-\iffalse
-This paper presents the fundamental concepts of data analytics based on a real world case study. These concepts include data understanding, data preparation,  data pipeline, and big data technologies. To enhance the operational efficiency in-depth descriptive and predictive analysis were performed. Supervised machine learning technique was used to create the classification model to predicts machine stops. In addition, the overall equipment effectiveness (OEE) and the performance of the prediction method were comprehensively evaluated. The OEE results have drawn attention towards improving the production performance by reducing the  machine downtime. Whereas, the predictions made by the model are quite acceptable in terms of predicting the unplanned stops, as unplanned stops are one of the main reasons of reduced production performance. Moreover, to analyse data is important not only for the smart manufacturing business but also for any other type of industry in which significant amounts of sensor/machine data is generated. Hence, the data analytics techniques presented in this paper are general.
 
-For the future work, several prediction based machine learning models will be used and compared. In addition, a near real-time dashboard will be developed to display the input/output pace along with the OEE information. Finally, it will be investigated that how descriptive analysis, predictive analysis and near real-time dashboard help the smart manufacturing companies in general, to enhance their operational efficiency and productivity.
-\fi
 
 \section{Acknowledgement}
 This  research is supported  by University College of Northern Denmark - Research and Development funding and Dolle A/S.
@@ -895,9 +585,6 @@ CRISP-DM 1.0: Step-by-step Data Mining Guide. Technical Report. The CRISP-DM Con
 
 \bibitem{Dolle}
 Dolle, \url{http://www.dolle.eu}. Last accessed 11 Nov. 2019
-
-
-
 
 
 \bibitem {nadeem}
@@ -916,6 +603,9 @@ Overall Equipment Effectiveness (OEE), \url{https://www.oee.com}. Last accessed 
 Iftikhar, N., Liu, X., Nordbjerg, F. E.: Relational-Based Sensor Data Cleansing. In East European Conference on Advances in Databases and Information Systems, pp. 108-118. Springer, Cham (2015)
 
 \bibitem{gooijer} De Gooijer, J. G., Hyndman, R. J.:  25 Years of Time Series Forecasting, International Journal of Forecasting, \textbf{22}(3), 443--473 (2006)
+
+\bibitem{book}
+Deitel, P.J., Dietal, H.: Intro to Python for Computer Science and Data Science: Learning to Program with AI, Big Data and the Cloud. Pearson Education, Incorporated (2020)
 
 \bibitem{Gonzales} 
 Gonz\`alez, S., Garc\'ia, S., Li, S. T., Herrera, F.: Chain based Sampling for Monotonic Imbalanced Classification. Information Sciences, 474, 187-204 (2019)
